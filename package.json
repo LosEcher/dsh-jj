@@ -1,9 +1,12 @@
 {
   "name": "dsh-jj",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
   "description": "DSH bundle: jj (Jujutsu) version control via a zero-dependency MCP stdio server — exposes jj status/log/diff/describe/new/commit/edit/abandon/undo/rebase/fetch/push/bookmark as mcp__jj__* tools.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LosEcher/dsh-jj.git"
+  },
   "bin": {
     "jj-mcp": "server.mjs"
   },

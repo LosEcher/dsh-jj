@@ -7,19 +7,26 @@ commit / edit / abandon / undo / rebase / fetch / push / bookmark / run），
 
 ## 前置条件
 
-- jj ≥ 0.2x（本机：`/opt/homebrew/bin/jj`，0.39.0），可用 `brew install jujutsu` 安装
+- jj ≥ 0.2x，可用 `brew install jujutsu` 安装（macOS）或按
+  [官方文档](https://github.com/jj-vcs/jj) 安装
 - Node ≥ 18（server 零依赖，纯 stdlib）
 
 ## 安装
 
 ```sh
-dsh plugin --profile web add link:/Users/echerlos/syncthing/project/dsfolder/dsh-jj
+dsh plugin --profile web add github:LosEcher/dsh-jj#main
+```
+
+本地开发（改源码时）：
+
+```sh
+dsh plugin --profile web add link:/path/to/dsh-jj
 ```
 
 新 bundle 安装后必须重启 dsh web（HMR 只覆盖 config 编辑）：
 
 ```sh
-~/.dsh/scripts/dsh-web-restart.sh
+~/.dsh/scripts/dsh-web-restart.sh   # 或手动重启 dsh web
 ```
 
 ## 验证
@@ -69,8 +76,7 @@ curl -s -X POST http://127.0.0.1:3080/api/pluginInventory/list \
 | `JJ_MCP_DEFAULT_REPO` | 空 | 默认仓库目录 |
 | `JJ_MCP_LOG` | `1` | `0` 关闭 stderr 启动横幅 |
 
-patch 里已注入 `JJ_MCP_BIN=/opt/homebrew/bin/jj`（本机路径）；换机器改
-`cordis.patch.yml` 的 env 即可。
+server 会自动探测常见 jj 安装位置；`JJ_MCP_BIN` 仅在自动探测失败时必要。
 
 ## 安全设计
 
