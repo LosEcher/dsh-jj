@@ -1,0 +1,31 @@
+{
+  "name": "dsh-jj",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "DSH bundle: jj (Jujutsu) version control via a zero-dependency MCP stdio server — exposes jj status/log/diff/describe/new/commit/edit/abandon/undo/rebase/fetch/push/bookmark as mcp__jj__* tools.",
+  "bin": {
+    "jj-mcp": "server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node test/test-client.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "server.mjs",
+    "cordis.patch.yml",
+    "README.md",
+    "test/test-client.mjs"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.0 <5.0.0"
+  },
+  "license": "MIT"
+}

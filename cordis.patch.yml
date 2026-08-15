@@ -1,0 +1,24 @@
+# dsh-jj bundle patch: jj (Jujutsu) version control via MCP.
+# Install:  dsh plugin --profile web add link:/Users/echerlos/syncthing/project/dsfolder/dsh-jj
+# (new bundle requires a dsh web restart; HMR only covers config edits)
+#
+# Exposes the local jj CLI as MCP tools mcp__jj__* (jj_status, jj_log,
+# jj_diff, jj_describe, jj_new, jj_commit, jj_edit, jj_abandon, jj_undo,
+# jj_rebase, jj_fetch, jj_push, jj_bookmark, jj_run).
+#
+# Requires: jj >= 0.2x on PATH or at JJ_MCP_BIN (default /opt/homebrew/bin/jj).
+#
+# The args path below resolves through the profile's flat node_modules
+# (pnpm link: installs a symlink there); adjust if DSH_HOME/profile changes.
+- insert:
+    - id: mcp-jj
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: jj
+        transport: stdio
+        command: node
+        args: ['/Users/echerlos/.dsh/profiles/web/node_modules/dsh-jj/server.mjs']
+        env:
+          JJ_MCP_BIN: '/opt/homebrew/bin/jj'
+        failOnStartupError: false
+        toolCallTimeoutMs: 120000
