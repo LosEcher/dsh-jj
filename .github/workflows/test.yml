@@ -1,0 +1,23 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install jj (musl static binary)
+        run: |
+          curl -sL https://github.com/jj-vcs/jj/releases/latest/download/jj-x86_64-unknown-linux-musl.tar.gz | tar xz
+          sudo mv jj /usr/local/bin/
+          jj --version
+      - name: Smoke test against a real jj repo
+        run: |
+          jj git init /tmp/jj-ci-repo
+          JJ_MCP_BIN=$(command -v jj) node test/test-client.mjs /tmp/jj-ci-repo

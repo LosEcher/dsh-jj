@@ -29,6 +29,26 @@ dsh plugin --profile web add link:/path/to/dsh-jj
 ~/.dsh/scripts/dsh-web-restart.sh   # 或手动重启 dsh web
 ```
 
+### 关于 `command: jj-mcp`
+
+bundle patch 用 `command: jj-mcp`（包的 bin 入口）。pnpm 在安装时会把该
+bin 链接到 profile 的 `node_modules/.bin`；若你的 dsh 进程 PATH 不含该
+目录（launchd 等托管场景常见），MCP 行会 spawn 失败——此时在你的用户
+patch 层用 id-targeted 配置覆盖为绝对路径：
+
+```yaml
+- id: mcp-jj
+  config:
+    serverName: jj
+    transport: stdio
+    command: node
+    args: ['/absolute/path/to/dsh-jj/server.mjs']
+    env:
+      JJ_MCP_BIN: '/path/to/jj'      # 可选
+    failOnStartupError: false
+    toolCallTimeoutMs: 120000
+```
+
 ## 验证
 
 ```sh

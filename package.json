@@ -1,6 +1,6 @@
 {
   "name": "dsh-jj",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "DSH bundle: jj (Jujutsu) version control via a zero-dependency MCP stdio server — exposes jj status/log/diff/describe/new/commit/edit/abandon/undo/rebase/fetch/push/bookmark as mcp__jj__* tools.",
   "repository": {
